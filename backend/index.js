@@ -9,7 +9,7 @@ import { initDB } from "./config/db.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const SERVER_PORT = process.env.SERVER_PORT || 5000;
 
 //middleware
 app.use(cors());
@@ -21,7 +21,7 @@ app.use("/tasks", taskRoutes);
 
 
 initDB().then(() =>{
-    app.listen(PORT, () => {
-        console.log("Server is running on port " + PORT);
+    app.listen(SERVER_PORT, () => {
+        console.log("Server is running on port " + SERVER_PORT);
     })
 })

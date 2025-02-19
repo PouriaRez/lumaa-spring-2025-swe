@@ -1,29 +1,40 @@
-import { neon } from "@neondatabase/serverless"
 import dotenv from "dotenv"
+import pg from 'pg';
+const { Pool } = pg;
 
 dotenv.config();
 
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD} = process.env;
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PORT} = process.env;
 
 // Creates SQL connection
 // allows us to query sql
-export const sql = neon(
-    `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`
-);
+const pool = new Pool({
+    host: PGHOST,
+    database: PGDATABASE,
+    username: PGUSER,
+    password: PGPASSWORD,
+    port: PORT || 5432,
+    ssl: {
+      require: true,
+    },
+  });
 
 //initializes the Database
 export async function initDB(){
     try {
-        await sql`
-        CREATE TABLE IF NOT EXISTS users(
-            id SERIAL PRIMARY KEY,
-            username VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255)  NOT NULL
-        )
-        `
-        console.log("DB init success!");
+        await pool.connect();
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS users(
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(255) UNIQUE NOT NULL,
+                password VARCHAR(255)  NOT NULL
+            )
+            `)
+         console.log("DB init success!");
     } catch (error) {
-        console.log("Error initDB", error);
+        console.log("Error InitDB", error);
     }
 }
 
+
+export default pool;

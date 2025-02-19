@@ -1,5 +1,5 @@
-import bcrypt from "bcrypt"
-import { sql } from "../config/db.js";
+import bcrypt, { hash } from "bcrypt"
+import pool from '../config/db.js'
 
 export const login = async (req, res) =>{
     const { username, password } = req.body;
@@ -8,13 +8,18 @@ export const login = async (req, res) =>{
 export const register = async (req, res) =>{
     try {
         const { username, password } = req.body;
+
+        if(!username || !password){
+            return res.status(400).json({message: 'Please enter a Username and Password'})
+        }
         
-        const existing = await sql`
-            SELECT * FROM users WHERE username = ${username}
-        `
+        const existanceCheck = await pool.query(
+            'SELECT * FROM users WHERE username = $1',
+            [username]
+        );
 
         //if the user exists throw an error.
-        if(existing.rowCount > 0){
+        if(existanceCheck.rowCount > 0){
             return res.status(400).json({error: 'Username is already in use'});
         }
 
@@ -22,17 +27,18 @@ export const register = async (req, res) =>{
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+        console.log("Inserting user with values:", [username, hashedPassword]);
+
+
         // Insert into database
-        const result = await sql`
-            INSERT INTO users (username, password) VALUES(${username}, ${hashedPassword}) RETURNING id, username
-        `;
-
-        //Respond with user info
-        return res.status(201).json({
-            id: result.row[0].id,
-            username: result.row[0].username,
-        });
-
+          const result = await pool.query(
+            'INSERT INTO users (username, password) VALUES($1, $2) RETURNING id, username',
+            [username, hashedPassword] 
+          );
+          
+          // Respond with the new user's data
+          const newUser = result.rows[0];
+          res.status(201).json(newUser);  
 
     } catch (error) {
         console.log("Error registering user", error);
