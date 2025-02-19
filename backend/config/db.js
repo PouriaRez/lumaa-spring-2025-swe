@@ -21,7 +21,6 @@ export async function initDB(){
             password VARCHAR(255)  NOT NULL
         )
         `
-        
         console.log("DB init success!");
     } catch (error) {
         console.log("Error initDB", error);
