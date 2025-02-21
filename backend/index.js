@@ -12,7 +12,7 @@ const app = express();
 const SERVER_PORT = process.env.SERVER_PORT || 5000;
 
 //middleware
-app.use(cors());
+app.use(cors());    
 app.use(express.json());
 
 // Routes

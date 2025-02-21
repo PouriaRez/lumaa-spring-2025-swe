@@ -1,4 +1,4 @@
-import bcrypt, { hash } from "bcrypt"
+import bcrypt from "bcrypt"
 import pool from '../config/db.js'
 
 export const login = async (req, res) =>{
