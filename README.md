@@ -27,7 +27,7 @@ Follow the steps below to set up and run the backend server locally.
 3. **Create .env file and input this data**:
 
    ```bash
-   SERVER_PORT = 5000
+    SERVER_PORT = 5000
     PGUSER='todo_owner'
     PGPASSWORD='npg_UEYta6X7AINm'
     PGHOST='ep-divine-forest-a6xac0g8-pooler.us-west-2.aws.neon.tech'
