@@ -1,10 +1,51 @@
 import bcrypt from "bcrypt"
 import pool from '../config/db.js'
+import jwt from "jsonwebtoken"
 
 export const login = async (req, res) =>{
-    const { username, password } = req.body;
-
+    try {
+        const { username, password } = req.body;
+    
+        // Find / look for user
+        const user = await pool.query(
+            `
+                SELECT * FROM users WHERE username = $1
+            `,
+            [username]
+        );
+    
+        // grabs the users info.
+        const userInfo = user.rows[0];
+        console.log(userInfo);
+    
+        // if no username found
+        if(user.rowCount == 0){
+            return res.status(400).json({message: "Invalid username or password"})
+        }
+    
+        const passCheck = await bcrypt.compare(password, userInfo.password);
+        
+        if(!passCheck){
+            return res.status(400).json({message: "Invalid username or password"});
+        }
+    
+        console.log(userInfo.username);
+        // Generate token
+        const token = jwt.sign(
+            { // payload
+            userID: userInfo.id,
+            username: userInfo.username,
+            },
+            process.env.JWT_SECRET,
+            {expiresIn: '24h'}
+        );
+    
+        return res.json({token});
+    } catch (error) {
+        console.log("Error registering user", error);
+    }
 };
+
 export const register = async (req, res) =>{
     try {
         const { username, password } = req.body;
@@ -19,16 +60,13 @@ export const register = async (req, res) =>{
         );
 
         //if the user exists throw an error.
-        if(existanceCheck.rowCount > 0){
+        if(existanceCheck.rowCount || existanceCheck.rowCount > 0 ){
             return res.status(400).json({error: 'Username is already in use'});
         }
 
         //else hash the password then create the user
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-        console.log("Inserting user with values:", [username, hashedPassword]);
-
 
         // Insert into database
           const result = await pool.query(
