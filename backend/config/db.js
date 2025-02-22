@@ -44,7 +44,8 @@ export async function initDB(){
         
          console.log("DB init success!");
     } catch (error) {
-        console.log("Error InitDB", error);
+        console.error("Error InitDB", error);
+        throw new Error("Database initialization failed.");  // Optionally, throw an error to stop execution
     }
 }
 

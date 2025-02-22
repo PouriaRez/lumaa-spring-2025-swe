@@ -42,7 +42,8 @@ export const login = async (req, res) =>{
     
         return res.json({token});
     } catch (error) {
-        console.log("Error registering user", error);
+        console.error("Error during login:", error);
+        return res.status(500).json({ message: "An error occurred during login." });
     }
 };
 
@@ -79,7 +80,8 @@ export const register = async (req, res) =>{
           res.status(201).json(newUser);  
 
     } catch (error) {
-        console.log("Error registering user", error);
+        console.error("Error registering user", error);
+        return res.status(500).json({ message: "An error occurred during registration." });
     }
 
 };
