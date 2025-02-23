@@ -40,3 +40,32 @@ Follow the steps below to set up and run the backend server locally.
    ```bash
    npm run dev
    ```
+
+## Frontend Overview
+
+This repository contains the frontend code for the CD **(Task Management)** application. The frontend is built using **React**, **TypeScript**, **Tailwind CSS**, and **Axios** for making HTTP requests. It provides the user interface for task management, including task creation, task editing, and task deletion functionalities.
+
+---
+
+## Getting Started with the frontend
+
+Follow the steps below to set up and run the frontend server locally.
+
+### Installation
+
+1. **Go into the frontend file**:
+
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the server**:
+   ```bash
+   npm run dev
+   ```

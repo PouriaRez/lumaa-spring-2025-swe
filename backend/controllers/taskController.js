@@ -36,7 +36,7 @@ export const updateTask = async (req, res) => {
         const { title, description, iscomplete} = req.body;
         const userid = req.user.userID;
 
-        if (!title || !description || iscomplete === undefined) {
+        if (!title || iscomplete === undefined) {
             return res.status(400).json({ message: "Missing required fields." });
         }
 
