@@ -21,15 +21,18 @@ const Login = () => {
   const handleRedirectRegister = () => {
     nav("/register");
   };
+
   return (
     <>
-      <AuthComponent title="Login" onSubmit={handleLogin} err={err} />
-      <button
-        className="bg-gradient-to-r from-cyan-500 to-teal-400 text-black"
-        onClick={handleRedirectRegister}
-      >
-        Create an Account
-      </button>
+      <div className="bg-gray-500/20 rounded-md h-130">
+        <AuthComponent title="Login" onSubmit={handleLogin} err={err} />
+        <button
+          className=" -m-5 bg-gradient-to-r from-cyan-500 to-teal-400 text-black"
+          onClick={handleRedirectRegister}
+        >
+          Create an Account
+        </button>
+      </div>
     </>
   );
 };

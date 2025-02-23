@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { retrieveTasks } from "../services/taskServices";
-import { OrbitProgress } from "react-loading-indicators";
 import TaskCard from "./TaskCard";
 
 interface Task {
@@ -16,19 +15,15 @@ interface TaskListProps {
 
 const TaskList = ({ taskCreated }: TaskListProps) => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
   const [err, setErr] = useState<string>("");
 
   const fetchTasks = async () => {
-    setLoading(true);
     try {
       const taskData = await retrieveTasks();
       setTasks(taskData as Task[]);
     } catch (err) {
       console.error("Failed to load tasks: ", err);
       setErr("Failed to load tasks.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -46,10 +41,6 @@ const TaskList = ({ taskCreated }: TaskListProps) => {
   const handleDelete = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
-
-  if (loading) {
-    return <OrbitProgress variant="disc" color="#ffffff" size="large" />;
-  }
 
   if (err) {
     return <div>{err}</div>;

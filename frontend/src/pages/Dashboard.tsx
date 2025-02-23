@@ -27,7 +27,7 @@ const Dashboard = () => {
         <TaskCreation isOpen={taskCreationModal} closeModal={closeTaskModal} />
         <TaskList taskCreated={taskCreated} />
         <button className="mt-5" onClick={openTaskModal}>
-          Create a Task!
+          <p className="hover:font-bold">Create a Task!</p>
         </button>
       </div>
     </>

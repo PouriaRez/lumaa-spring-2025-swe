@@ -25,4 +25,16 @@ API.interceptors.request.use(
     }
 );
 
+API.interceptors.response.use(
+    (response) => response, 
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            // Handle 401 Unauthorized error
+            localStorage.removeItem('authToken');  // Remove the correct token
+            window.location.href = '/login';  // Redirect to the login page
+        }
+        return Promise.reject(error); 
+    }
+);
+
 export default API;

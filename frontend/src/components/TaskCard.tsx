@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { deleteTask, updateTask } from "../services/taskServices";
 import EditTaskModal from "./EditTaskComponent";
+import { SlTrash } from "react-icons/sl";
+import { MdOutlineModeEdit } from "react-icons/md";
 
 interface cardProps {
   task: { id: number; title: string; description: string; iscomplete: boolean };
@@ -52,18 +54,23 @@ const TaskCard = ({ task, onEdit, onDelete }: cardProps) => {
           onChange={handleCheckBoxChange}
         />
         <div className=" flex flex-col justify-center items-start w-full h-5/12 rounded-sm flex-wrap">
-          <p className="p-3 text-3xl font-bold line-through">{task.title}</p>
+          <p className="pl-3 text-3xl font-bold line-through">{task.title}</p>
           <p className="pl-5 text-start font-light">{task?.description}</p>
         </div>
         <div className=" flex gap-1">
-          <button className=" w-full h-30" onClick={() => setIsEditOpen(true)}>
-            <p className="font-light">Edit</p>
+          <button
+            className=" hover:text-blue-500"
+            onClick={() => setIsEditOpen(true)}
+          >
+            <MdOutlineModeEdit size={50} />
           </button>
           <button
-            className="pl-5 w-full font-light text-red-700"
+            className="pl-5 w-full font-light text-red-500 hover:text-red-800 flex flex-col justify-center items-center"
             onClick={() => handleDelete(task.id)}
             disabled={loading}
           >
+            <SlTrash size={30} />
+
             {loading ? (
               <p className="font-bold">Deleting...</p>
             ) : (
@@ -91,18 +98,23 @@ const TaskCard = ({ task, onEdit, onDelete }: cardProps) => {
           onChange={handleCheckBoxChange}
         />
         <div className="flex flex-col justify-center items-start w-full h-5/12 rounded-sm flex-wrap">
-          <p className="p-3 text-3xl font-bold ">{task.title}</p>
+          <p className="pl-3 text-3xl font-bold ">{task.title}</p>
           <p className="pl-5 text-start font-light">{task?.description}</p>
         </div>
         <div className=" flex gap-1">
-          <button className=" w-full h-30" onClick={() => setIsEditOpen(true)}>
-            <p className="font-light">Edit</p>
+          <button
+            className=" hover:text-blue-500"
+            onClick={() => setIsEditOpen(true)}
+          >
+            <MdOutlineModeEdit size={50} />
           </button>
           <button
-            className="pl-5 w-full font-light text-red-700"
+            className="pl-5 w-full font-light text-red-500 hover:text-red-800 flex flex-col justify-center items-center"
             onClick={() => handleDelete(task.id)}
             disabled={loading}
           >
+            <SlTrash size={30} />
+
             {loading ? (
               <p className="font-bold">Deleting...</p>
             ) : (

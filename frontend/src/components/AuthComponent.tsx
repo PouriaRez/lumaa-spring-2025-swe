@@ -18,30 +18,32 @@ const AuthComponent = ({ title, onSubmit, err }: AuthProps) => {
 
   return (
     <>
-      <p className="font-bold text-white text-3xl">{title}</p>
-      <form className="flex flex-col m-5" onSubmit={handleSubmit}>
-        <input
-          className="w-100 h-20 text-2xl "
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          className="w-100 h-20 text-2xl"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {err && <p>{err}</p>}
-        <button
-          className="bg-gradient-to-r from-cyan-500 to-teal-400 text-black"
-          type="submit"
-        >
-          {title}
-        </button>
-      </form>
+      <div className="p-5">
+        <p className="font-bold text-white text-3xl">{title}</p>
+        <form className="flex flex-col m-5" onSubmit={handleSubmit}>
+          <input
+            className="w-100 h-20 text-2xl "
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            className="w-100 h-20 text-2xl"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {err && <p className="text-red-500">{err}</p>}
+          <button
+            className="bg-gradient-to-r from-cyan-500 to-teal-400 text-black m-4 mt-10"
+            type="submit"
+          >
+            {title}
+          </button>
+        </form>
+      </div>
     </>
   );
 };

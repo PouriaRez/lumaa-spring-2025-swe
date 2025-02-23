@@ -25,8 +25,13 @@ export const register = async (username: string, password: string) => {
     try {
         await API.post("/auth/register", { username, password });
         console.log("Registered user...");
-    } catch (error) {
+    } catch (error: any) {
         console.error("Registration failed:", error);  
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data.message);  // This can be customized to return specific messages
+          } else {
+            throw new Error('An unknown error occurred');
+          }
     }
 };
 

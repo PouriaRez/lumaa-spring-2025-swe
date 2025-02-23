@@ -8,7 +8,7 @@ interface modalProps {
 
 const TaskCreation = ({ isOpen, closeModal }: modalProps) => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(" ");
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -18,6 +18,11 @@ const TaskCreation = ({ isOpen, closeModal }: modalProps) => {
     if (!title) {
       setErr("A title is required.");
       return;
+    }
+
+    if (description === "") {
+      console.log("is empty string??");
+      setDescription("");
     }
 
     setLoading(true);
@@ -37,6 +42,14 @@ const TaskCreation = ({ isOpen, closeModal }: modalProps) => {
     }
   };
 
+  const handleTitleChange = (newTitle: string) => {
+    setTitle(newTitle);
+  };
+
+  const handleDescriptionChange = (newDescription: string) => {
+    setDescription(newDescription === "" ? " " : newDescription);
+  };
+
   // If modal is not open display nothing
   if (!isOpen) return null;
 
@@ -51,12 +64,12 @@ const TaskCreation = ({ isOpen, closeModal }: modalProps) => {
             type="text"
             placeholder="Title"
             className="w-full h-20 text-3xl  p-2 mb-2 border rounded"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => handleTitleChange(e.target.value)}
           />
           <textarea
             placeholder="Description"
             className="w-full h-20  p-2 mb-2 border rounded text-xl text-white max-h-59"
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => handleDescriptionChange(e.target.value)}
           />
           {err && <p className="text-red-500">{err}</p>}
 
