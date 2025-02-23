@@ -42,27 +42,30 @@ const TaskCreation = ({ isOpen, closeModal }: modalProps) => {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black opacity-75 flex flex-col items-center pt-5 z-10">
-        <form onSubmit={handleTaskCreation} className="flex flex-col ">
+      <div className="fixed inset-0 bg-black/85 bg-opacity-75 flex items-center justify-center z-10">
+        <form
+          onSubmit={handleTaskCreation}
+          className="flex flex-col bg-gray-500/50 p-6 rounded-lg w-1/3 "
+        >
           <input
             type="text"
             placeholder="Title"
-            className="w-100 h-20 text-2xl text-white "
+            className="w-full h-20 text-3xl  p-2 mb-2 border rounded"
             onChange={(e) => setTitle(e.target.value)}
           />
-          <input
-            type="description"
+          <textarea
             placeholder="Description"
-            className="w-100 h-20 text-2xl text-white "
+            className="w-full h-20  p-2 mb-2 border rounded text-xl text-white max-h-59"
             onChange={(e) => setDescription(e.target.value)}
           />
+          {err && <p className="text-red-500">{err}</p>}
+
           <div className="flex justify-between mt-5">
             <button onClick={closeModal}>Cancel</button>
             <button type="submit" disabled={loading}>
               {loading ? "Creating Task..." : "Create Task"}
             </button>
           </div>
-          {err && <p>{err}</p>}
         </form>
       </div>
     </>

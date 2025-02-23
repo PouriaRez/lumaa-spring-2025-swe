@@ -31,18 +31,20 @@ const TaskList = ({ taskCreated }: TaskListProps) => {
       setLoading(false);
     }
   };
+
+  const handleUpdate = (updatedTask: Task) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
+    fetchTasks();
+  };
+
   useEffect(() => {
     fetchTasks();
   }, [taskCreated]);
 
   const handleDelete = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
-  };
-
-  const handleUpdate = (updatedTask: Task) => {
-    setTasks(
-      tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
-    );
   };
 
   if (loading) {
@@ -56,7 +58,6 @@ const TaskList = ({ taskCreated }: TaskListProps) => {
   return (
     <>
       <div className="flex flex-col gap-2 ">
-        <h1>Tasks:</h1>
         {tasks.length === 0 ? (
           <div>You have no tasks!</div>
         ) : (
@@ -64,7 +65,7 @@ const TaskList = ({ taskCreated }: TaskListProps) => {
             <TaskCard
               key={task.id}
               task={task}
-              onEdit={() => handleUpdate(task.id)}
+              onEdit={() => handleUpdate(task)}
               onDelete={() => handleDelete(task.id)}
             />
           ))
