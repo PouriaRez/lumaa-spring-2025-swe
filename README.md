@@ -69,3 +69,4 @@ Follow the steps below to set up and run the frontend server locally.
    ```bash
    npm run dev
    ```
+   In that terminal, open the provided link "http://localhost:\_\_\_\_/"

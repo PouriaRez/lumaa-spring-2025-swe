@@ -70,7 +70,7 @@ export const retrieveTasks = async (req, res) =>{
 
         const retrievedTasks = await pool.query(
             `
-                SELECT * FROM tasks WHERE userid = $1 ORDER BY createdat DESC
+                SELECT * FROM tasks WHERE userid = $1 ORDER BY createdat ASC
             `, 
             [ userID ]
         );
