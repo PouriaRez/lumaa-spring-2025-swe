@@ -1,11 +1,9 @@
 import axios from "axios";
-import { config } from "dotenv";
 
-const { BASE_URL } = import.meta.env;
-
+const API_URL = "http://localhost:5000";
 
 const API =  axios.create({
-    baseURL: BASE_URL,
+    baseURL: API_URL,
     headers: {
         "Content-Type": "application/json",
     },

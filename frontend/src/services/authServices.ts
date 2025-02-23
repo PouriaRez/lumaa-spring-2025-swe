@@ -24,13 +24,12 @@ export const login =  async (username: string, password: string) => {
 export const register = async (username: string, password: string) => {
     try {
         await API.post("/auth/register", { username, password });
+        console.log("Registered user...");
     } catch (error) {
         console.error("Registration failed:", error);  
     }
 };
 
 export const logout = () => {
-
     localStorage.removeItem('authToken');
-
 };

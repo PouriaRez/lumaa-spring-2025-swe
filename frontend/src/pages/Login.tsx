@@ -25,7 +25,7 @@ const Login = () => {
     <>
       <AuthComponent title="Login" onSubmit={handleLogin} err={err} />
       <button
-        className="mt-3 bg-gradient-to-r from-cyan-500 to-teal-400"
+        className="bg-gradient-to-r from-cyan-500 to-teal-400 text-black"
         onClick={handleRedirectRegister}
       >
         Create an Account

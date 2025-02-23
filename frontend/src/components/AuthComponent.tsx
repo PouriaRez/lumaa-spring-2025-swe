@@ -36,7 +36,7 @@ const AuthComponent = ({ title, onSubmit, err }: AuthProps) => {
         />
         {err && <p>{err}</p>}
         <button
-          className="bg-gradient-to-r from-cyan-500 to-teal-400"
+          className="bg-gradient-to-r from-cyan-500 to-teal-400 text-black"
           type="submit"
         >
           {title}

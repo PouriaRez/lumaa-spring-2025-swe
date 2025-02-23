@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./App.css";
+import { OrbitProgress } from "react-loading-indicators";
 
 const PrivateRoute = ({ element }: { element: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
@@ -16,12 +17,13 @@ const PrivateRoute = ({ element }: { element: React.ReactNode }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setAuthenticated(localStorage.getItem("token") !== null);
+      setAuthenticated(localStorage.getItem("authToken") !== null);
       setLoading(false);
     }, 1000);
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return <OrbitProgress variant="disc" color="#ffffff" size="large" />;
 
   return authenticated ? <>{element}</> : <Navigate to="/login" />;
 };
