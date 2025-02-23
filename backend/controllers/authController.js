@@ -29,7 +29,6 @@ export const login = async (req, res) =>{
             return res.status(400).json({message: "Invalid username or password"});
         }
     
-        console.log(userInfo.username);
         // Generate token
         const token = jwt.sign(
             { // payload
