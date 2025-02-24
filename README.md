@@ -81,4 +81,4 @@ Contains the short demo video request and salary expectations per month.
 
 ## Salary expectations
 
-Expected monthly salary: $$3,000 / month$
+Expected monthly salary: $3,000 / month
