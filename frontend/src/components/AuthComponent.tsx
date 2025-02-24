@@ -19,17 +19,17 @@ const AuthComponent = ({ title, onSubmit, err }: AuthProps) => {
   return (
     <>
       <div className="p-5">
-        <p className="font-bold text-white text-3xl">{title}</p>
+        <p className="font-bold text-white text-3xl p-5">{title}</p>
         <form className="flex flex-col m-5" onSubmit={handleSubmit}>
           <input
-            className="w-100 h-20 text-2xl "
+            className="w-100 h-20 text-2xl p-2"
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
-            className="w-100 h-20 text-2xl"
+            className="w-100 h-20 text-2xl p-2"
             type="password"
             placeholder="Password"
             value={password}

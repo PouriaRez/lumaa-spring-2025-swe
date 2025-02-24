@@ -69,4 +69,16 @@ Follow the steps below to set up and run the frontend server locally.
    ```bash
    npm run dev
    ```
-   In that terminal, open the provided link (Example :"http://localhost:5173/")
+   In that terminal, open the provided link (Example : http://localhost:5173/)
+
+# Demo and expectations
+
+Contains the short demo video request and salary expectations per month.
+
+## Short demo
+
+[Watch the demo on YouTube](https://www.youtube.com/watch?v=UODKoZx5ZgY)
+
+## Salary expectations
+
+Expected monthly salary: $$3,000 / month$
