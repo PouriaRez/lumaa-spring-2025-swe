@@ -15,7 +15,7 @@ Follow the steps below to set up and run the backend server locally.
 1. **Go into the backend file**:
 
    ```bash
-   cd cd-backend
+   cd backend
    ```
 
 2. **Install dependencies**:
