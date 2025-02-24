@@ -24,7 +24,7 @@ Follow the steps below to set up and run the backend server locally.
    npm install
    ```
 
-3. **Create .env file and input this data**:
+3. **Create .env in the root backend file and input this data**:
 
    ```bash
     SERVER_PORT = 5000
